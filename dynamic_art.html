@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art with Parallax</title>
+    <link href="https://fonts.font.im/css?family=Pacifico" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-image: linear-gradient(rgb(29, 29, 29) 0 0);
+            display: flex;
+            justify-content: center;
+            align-self: center;
+            min-height: 100vh;
+            align-items:center
+            
+        }
+
+        /* coler:
+        --r: #f5001a
+        --b: #111
+        --w: #fffff8
+        */
+        
+        
+
+        .background_linear{
+            width: 40vw;
+            aspect-ratio: 1;
+            
+            
+            background: linear-gradient(#111 70%, #b02 95%);
+            background-repeat: no-repeat;
+
+            border: #000 solid .5px;
+
+            box-shadow: 0 0 1vmin #0004, 0 3vmin 2vmin -1vmin #0004;
+        }
+
+        /*  */
+
+        .background_left_part1{
+
+            width: 14vw;
+            aspect-ratio: 2.5;
+
+            margin-left: 1vw;
+            margin-top: 3vw;
+            background-color:#fffff8 ;
+
+            box-shadow: 0 0 1vmin #0004, 0 3vmin 2vmin -1vmin #0004;
+
+            
+            
+        }
+
+        .background_left_part2{
+
+            width: 5.3vw;
+            aspect-ratio: 0.3;
+            
+
+            margin-left: 0vw;
+            margin-top: 7vw;
+            background-color:#f5001a;
+
+        }
+
+        .background_left_part3{
+
+            width: 5.3vw;
+            aspect-ratio: 0.22;
+            
+
+            margin-left: 2vw;
+            margin-top: 14vw;
+            background-color:#fffff8 ;
+
+            box-shadow: 0 0 1vmin #0004, 0 3vmin 2vmin -1vmin #0004;
+
+        }
+
+        .background_left_part4{
+
+            width: 1vw;
+            aspect-ratio: 0.03; 
+
+            margin-left: 7vw;
+            margin-top: 5.05vw;
+            background-color:#111 ;
+
+        }
+
+        
+        /*  */
+
+        .background_mid_part1{
+
+            width: 16vw;
+            aspect-ratio: 0.8; 
+
+            margin-left: 13vw;
+            margin-top: 13vw;
+            background-color:#fffff8;
+
+        }
+
+        .background_mid_part2{
+
+            width: 16vw;
+            aspect-ratio: 2.3; 
+
+            margin-left:27vw;
+            margin-top: 25vw;
+            background-color:#f5001a ;
+
+            box-shadow: 0 0 1vmin #0004, 0 3vmin 2vmin -1vmin #0004;
+
+        }
+
+        .background_mid_part3{
+
+            width: 7vw;
+            aspect-ratio: 7; 
+
+            margin-left:34vw;
+            margin-top: 30vw;
+            background-color:#111;
+
+        }
+
+        /*  */
+
+        .background_right_part1{
+
+            width: 3vw;
+            aspect-ratio:0.15; 
+
+            margin-left:37vw;
+            margin-top: 0vw;
+            background-color:#fffff8;
+
+            box-shadow: 0 0 1vmin #0004, 0 3vmin 2vmin -1vmin #0004;
+        }
+
+        .background_right_part2{
+
+            width: 1vw;
+            aspect-ratio:0.08; 
+
+            margin-left:38vw;
+            margin-top: 3vw;
+            background-color: #111;
+
+        }
+
+        .background_right_part3{
+
+            width: 7vw;
+            aspect-ratio:1; 
+
+            margin-left:33vw;
+            margin-top: 3vw;
+            background-color: #f5001a;
+
+        }
+        /*  */
+
+        .background_top_part1{
+
+            width: 5vw;
+            aspect-ratio:0.37; 
+
+            margin-left:27vw;
+            margin-top: 0vw;
+            background-color: #f5001a;
+
+        }
+
+        .background_top_part2{
+
+            width: 10vw;
+            aspect-ratio:10; 
+
+            margin-left:19vw;
+            margin-top: 10vw;
+            background-color: #111;
+
+        }
+
+        /*  */
+
+        .title{
+            font-family: 'Pacifico', cursive;
+            color: #002fff;
+            font-size: 20vw;
+            font-weight:300;
+            mix-blend-mode:difference;
+            text-align: center;
+
+            /* -webkit-text-stroke: 0.5px #f5001a; */
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            z-index: 10;
+
+
+            
+        }
+        
+        
+
+        .title:hover {
+            transition: .3s 1s;
+            
+            
+        }
+
+        .title:hover + .window{
+            transition: 1s 1s;
+            
+            background-color: #002fffc8;
+        }
+
+        /*  */
+
+        .window{
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            background: linear-gradient(180deg,rgba(255, 0, 0, 0) 0%,rgba(255, 0, 0, 0) 50%,rgba(0, 0, 255, 0) 50%,rgba(0, 0, 255, 0) 100%);
+
+            mix-blend-mode:	difference;
+
+            width: 100vw;
+            height: 100vh;
+            
+            
+            z-index: 9;
+            
+        }
+        
+    </style>
+</head>
+<body>
+    
+    
+    <div class="container">
+        
+        <ul id="scene">
+            <li class="layer" data-depth="0.3">
+                <div class="background_linear"></div>
+            </li>
+            <!--  -->
+
+            <li class="layer" data-depth="0.4">
+                <div class="background_left_part1"></div>
+            </li>
+
+            <li class="layer" data-depth="0.5">
+                <div class="background_left_part2"></div>
+            </li>
+
+            <li class="layer" data-depth="0.6">
+                <div class="background_left_part3"></div>
+            </li>
+
+            <li class="layer" data-depth="0.6">
+                <div class="background_left_part4"></div>
+            </li>
+            <!--  -->
+
+            <li class="layer" data-depth="0.35">
+                <div class="background_mid_part1"></div>
+            </li>
+
+            <li class="layer" data-depth="0.5">
+                <div class="background_mid_part2"></div>
+            </li>
+
+            <li class="layer" data-depth="0.6">
+                <div class="background_mid_part3"></div>
+            </li>
+            <!--  -->
+
+            <li class="layer" data-depth="0.4">
+                <div class="background_right_part1"></div>
+            </li>
+
+            <li class="layer" data-depth="0.5">
+                <div class="background_right_part2"></div>
+            </li>
+
+            <li class="layer" data-depth="0.6">
+                <div class="background_right_part3"></div>
+            </li>
+
+            <!--  -->
+
+            <li class="layer" data-depth="0.5">
+                <div class="background_top_part1"></div>
+            </li>
+
+            <li class="layer" data-depth="0.6">
+                <div class="background_top_part2"></div>
+            </li>
+
+            <!--  -->
+
+        </ul>
+        
+    </div>
+        
+    
+    
+        <p class="title">Mondrian</p>
+
+        <!-- <div class="window"></div> -->
+
+        
+    
+    <script>
+        var scene = document.getElementById('scene');
+        var parallaxInstance = new Parallax(scene, {
+            relativeInput: true,  //指定是否使用场景的坐标系(默认false)
+            limitX: false,
+            limitY: false,
+            invertX:false,
+            invertY:false,
+            calibrateX: false,
+            calibrateY: false,
+            scalarX: 30,
+            scalarY: 20,//有用的一批，锁定x，y轴
+            
+            
+        });
+
+        
+    </script>
+    
+</body>
+</html>
