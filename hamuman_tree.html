@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googlefonts.cn/css?family=Lobster" rel="stylesheet">
+    <title>Huffman Tree</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        /* background: #e94118; */
+        background-color: #d2a95d;
+        font-family: 'Lobster', cursive;
+      }
+
+      .search-box {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #2f3640;
+        height: 40px;
+        border-radius: 40px;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .search-box:hover > .search-txt {
+        width: 200px;
+        padding: 0 6px;
+      }
+
+      .search-btn:hover {
+        background: white;
+      }
+
+      .search-btn {
+        float: right;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #2f3640;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s;
+
+        /* 
+            修改值
+            */
+
+        border: 0 none;
+      }
+
+      .search-txt {
+        padding: 0 6px;
+        width: 200px;
+        border: none;
+        background: none;
+        outline: none;
+        float: left;
+        color: white;
+        font-size: 16px;
+        transition: 0.4s;
+        line-height: 40px;
+      }
+
+      .return-box {
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #2f3640;
+        height: 40px;
+        border-radius: 40px;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .content {
+        width: 400px;
+        text-align: center;
+        line-height: inherit;
+        color: rgb(255, 255, 255);
+
+        padding-top: 1.5%;
+      }
+
+      .text {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        
+        width: 80vw;
+        height: 40px;
+        border-radius: 40px;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+
+        font-size: 180px;
+        font-family: 'Lobster', cursive;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="text"> Huffman Tree</div>
+    <div class="search-box">
+      <input class="search-txt" type="text" placeholder="动态搜索框" ">
+      <button class="search-btn" onclick="getInputVal()">
+        <svg class="icon" viewBox="0 0 1024 1024" width="30px">
+          <path
+            d="M424.024 766.098c-91.619 0-177.754-35.679-242.538-100.464-133.735-133.737-133.735-351.344 0-485.078 64.784-64.784 150.919-100.462 242.538-100.462s177.754 35.677 242.539 100.462c133.733 133.735 133.735 351.34 0 485.078-64.785 64.783-150.922 100.464-242.539 100.464zM424.024 196.085c-60.637 0-117.643 23.613-160.523 66.489-88.512 88.51-88.51 232.53 0 321.040 42.876 42.876 99.885 66.491 160.523 66.491s117.643-23.614 160.523-66.491c88.51-88.51 88.51-232.53 0-321.040-42.876-42.876-99.885-66.489-160.523-66.489z"
+            fill="#e94118"
+            p-id="1176"
+          ></path>
+          <path
+            d="M886.838 943.904c-14.842 0-29.684-5.663-41.010-16.986l-261.286-261.285c-22.647-22.649-22.647-59.369 0-82.018 22.647-22.647 59.37-22.647 82.018 0l261.286 261.286c22.647 22.649 22.647 59.369 0 82.018-11.325 11.322-26.167 16.985-41.010 16.985z"
+            fill="#e94118"
+            p-id="1177"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <div class="return-box">
+      <div class="content" id="renturn-place">a: 0.12, b: 0.4, c: 0.15, d: 0.08, e: 0.25</div>
+    </div>
+
+    <script>
+      var probabilities = {};
+      var str = "";
+
+      function getInputVal() {
+        const inputBox = document.querySelectorAll(".search-txt")[0],
+          content = document.querySelectorAll(".content")[0];
+        // 获取input输入框中的值
+        let inputVal = inputBox.value;
+        let str = inputBox.value;
+
+        if (inputVal) {
+          content.innerHTML = inputVal;
+        } else {
+          alert("请在input输入框中填点东西");
+        }
+        console.log(str);
+        // 使用split方法将字符串拆分为字符串数组
+        var parts = str.split(", ");
+
+        // 遍历字符串数组
+        for (var i = 0; i < parts.length; i++) {
+          // 使用split方法将每个字符串拆分为字符和概率
+          var parts2 = parts[i].split(":");
+          var character = parts2[0];
+          var probability = Number(parts2[1]);
+
+          // 将字符和它的概率添加到对象中
+          probabilities[character] = probability;
+        }
+        console.log(probabilities);
+
+        /////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////
+
+        var CodeNode = function (code, rate) {
+          this.code = code; // 字符
+          this.rate = rate; // 概率
+        };
+        //定义树节点
+        var TreeNode = function (data) {
+          this.data = data;
+          this.leftChild = null;
+          this.rightChild = null;
+          this.parent = null;
+        };
+        // 准备数据
+        // var probabilities = {
+        //   a: 0.12,
+        //   b: 0.4,
+        //   c: 0.15,
+        //   d: 0.08,
+        //   e: 0.25,
+        // };
+        var forest = [];
+
+        for (var key in probabilities) {
+          var item = new CodeNode(key, probabilities[key]);
+          forest.push(new TreeNode(item));
+        }
+
+        //哈夫曼树类定义
+        function HuffmanTree() {
+          var root = null;
+
+          this.init_tree = function (arr) {
+            var min_heap = new MinHeap();
+            min_heap.init(arr);
+
+            for (var i = 0; i < arr.length - 1; i++) {
+              var first = min_heap.remove_min();
+              var second = min_heap.remove_min();
+              var new_item = new CodeNode(
+                "",
+                first.data.rate + second.data.rate
+              );
+              var new_node = new TreeNode(new_item);
+              console.log(min_heap.insert(new_node));
+
+              new_node.leftChild = first;
+              new_node.rightChild = second;
+              first.parent = new_node;
+              second.parent = new_node;
+
+              root = new_node;
+            }
+          };
+
+          var get_code_from_tree = function (node, dict, code_str) {
+            if (!node.leftChild && !node.rightChild) {
+              // 页节点
+              dict[node.data.code] = code_str;
+              return;
+            }
+
+            if (node.leftChild) {
+              get_code_from_tree(node.leftChild, dict, code_str + "0");
+            }
+            if (node.rightChild) {
+              get_code_from_tree(node.rightChild, dict, code_str + "1");
+            }
+          };
+
+          this.get_code = function () {
+            // 获得最终的变长编码
+            var probabilities = {};
+            get_code_from_tree(root, probabilities, "");
+            return probabilities;
+          };
+
+          this.print = function () {
+            console.log(root);
+          };
+
+          this.get_text = function () {
+            //获得最后的文本类编码
+            var ans = huffman_tree.get_code();
+            var now = "";
+            for (let key in ans) {
+              var tag = key + ":" + ans[key] + "   ";
+              now = now.concat(tag);
+            }
+
+            //   alert(typeof huffman_tree.get_code());
+
+            return now;
+          };
+        }
+        //最小堆实现
+        function MinHeap(size) {
+          var heap = new Array(size);
+          var curr_size = 0;
+          var max_size = size;
+
+          var shif_down = function (start, m) {
+            // 从start这个位置开始,向下下滑调整
+            var parent_index = start; // start就是当前这个局部的父节点
+            var min_child_index = parent_index * 2 + 1; // 一定有左孩子,先让min_child_index等于左孩子的索引
+
+            while (min_child_index <= m) {
+              // min_child_index+1 是左孩子的索引, 左孩子大于右孩子
+              if (
+                min_child_index < m &&
+                heap[min_child_index].data.rate >
+                  heap[min_child_index + 1].data.rate
+              ) {
+                min_child_index = min_child_index + 1; // min_child_index永远指向值小的那个孩子
+              }
+
+              // 父节点的值小于等于两个孩子的最小值
+              if (
+                heap[parent_index].data.rate <= heap[min_child_index].data.rate
+              ) {
+                break; // 循环结束,不需要再调整了
+              } else {
+                // 父节点和子节点的值互换
+                var tmp = heap[parent_index];
+                heap[parent_index] = heap[min_child_index];
+                heap[min_child_index] = tmp;
+                parent_index = min_child_index;
+                min_child_index = 2 * min_child_index + 1;
+              }
+            }
+          };
+
+          // 传入一个数组,然后调整为最小堆
+          this.init = function (arr) {
+            max_size = arr.length;
+            curr_size = max_size;
+            heap = new Array(arr.length);
+            // 填充heap, 目前还不是一个堆
+            for (var i = 0; i < curr_size; i++) {
+              heap[i] = arr[i];
+            }
+
+            var curr_pos = Math.floor(curr_size / 2); // 这是堆的最后一个分支节点
+            while (curr_pos >= 0) {
+              shif_down(curr_pos, curr_size - 1); // 局部自上向下下滑调整
+              curr_pos -= 1; // 调整下一个分支节点
+            }
+          };
+
+          var shif_up = function (start) {
+            var child_index = start; // 当前节点是叶节点
+            var parent_index = Math.floor((child_index - 1) / 2); // 找到父节点
+
+            while (child_index > 0) {
+              // 父节点更小,就不用调整了
+              if (heap[parent_index].data.rate <= heap[child_index].data.rate) {
+                break;
+              } else {
+                // 父节点和子节点的值互换
+                var tmp = heap[child_index];
+                heap[child_index] = heap[parent_index];
+                heap[parent_index] = tmp;
+                child_index = parent_index;
+                parent_index = Math.floor((parent_index - 1) / 2);
+              }
+            }
+          };
+
+          this.insert = function (item) {
+            // 插入一个新的元素
+            // 堆满了,不能再放元素
+            if (curr_size == max_size) {
+              return false;
+            }
+
+            heap[curr_size] = item;
+            shif_up(curr_size);
+            curr_size++;
+            return true;
+          };
+
+          //删除最小值
+          this.remove_min = function () {
+            if (curr_size <= 0) {
+              return null;
+            }
+            var min_value = heap[0];
+            heap[0] = heap[curr_size - 1];
+            curr_size--;
+            shif_down(0, curr_size - 1);
+            return min_value;
+          };
+
+          this.size = function () {
+            return curr_size;
+          };
+
+          this.print = function () {
+            console.log(heap);
+          };
+        }
+
+        var huffman_tree = new HuffmanTree();
+        huffman_tree.init_tree(forest);
+        // console.log(huffman_tree.get_code());
+        console.log(huffman_tree.get_text());
+
+        var endding = huffman_tree.get_text();
+        content.innerHTML = endding;
+      }
+    </script>
+  </body>
+</html>
