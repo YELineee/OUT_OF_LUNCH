@@ -113,7 +113,6 @@
   </head>
 
   <body>
-    
     <div class="text">Huffman Tree</div>
     <div class="search-box">
       <input class="search-txt" type="text" placeholder="动态搜索框" ">
@@ -131,20 +130,6 @@
           ></path>
         </svg>
       </button>
-      <button class="down-btn" onclick="Download()">
-        <svg class="icon" viewBox="0 0 1024 1024" width="30px">
-          <path
-            d="M424.024 766.098c-91.619 0-177.754-35.679-242.538-100.464-133.735-133.737-133.735-351.344 0-485.078 64.784-64.784 150.919-100.462 242.538-100.462s177.754 35.677 242.539 100.462c133.733 133.735 133.735 351.34 0 485.078-64.785 64.783-150.922 100.464-242.539 100.464zM424.024 196.085c-60.637 0-117.643 23.613-160.523 66.489-88.512 88.51-88.51 232.53 0 321.040 42.876 42.876 99.885 66.491 160.523 66.491s117.643-23.614 160.523-66.491c88.51-88.51 88.51-232.53 0-321.040-42.876-42.876-99.885-66.489-160.523-66.489z"
-            fill="#e94118"
-            p-id="1178"
-          ></path>
-          <path
-            d="M886.838 943.904c-14.842 0-29.684-5.663-41.010-16.986l-261.286-261.285c-22.647-22.649-22.647-59.369 0-82.018 22.647-22.647 59.37-22.647 82.018 0l261.286 261.286c22.647 22.649 22.647 59.369 0 82.018-11.325 11.322-26.167 16.985-41.010 16.985z"
-            fill="#e94118"
-            p-id="1179"
-          ></path>
-        </svg>
-      </button>
     </div>
     <div class="return-box">
       <div class="content" id="renturn-place">
@@ -155,8 +140,7 @@
     <script>
       var probabilities = {};
       var str = "";
-
-      
+      var outputVal;
 
       function getInputVal() {
         const inputBox = document.querySelectorAll(".search-txt")[0],
@@ -394,19 +378,88 @@
         var huffman_tree = new HuffmanTree();
         huffman_tree.init_tree(forest);
         // console.log(huffman_tree.get_code());
-        console.log(huffman_tree.get_text());
-
+        console.log(huffman_tree.get_code());
         var endding = huffman_tree.get_text();
         content.innerHTML = endding;
 
+        ////////////////////////////////////////////////////////////////////////
+        // class Node {
+        //   constructor(name, val, left = null, right = null) {
+        //     this.name = name;
+        //     this.val = val;
+        //     this.left = left;
+        //     this.right = right;
+        //   }
+        // }
+
+        // function printHuffmanTree(root) {
+        //   let nodes = [];
+        //   nodes.push(root);
+
+        //   let currentLevel = 1;
+        //   let nextLevel = 0;
+        //   while (nodes.length > 0) {
+        //     let currentNode = nodes.shift();
+
+        //     if (currentNode) {
+        //       console.log(currentNode.name + ":" + currentNode.val);
+        //       nodes.push(currentNode.left);
+        //       nodes.push(currentNode.right);
+        //       nextLevel += 2;
+        //     } else {
+        //       console.log("*");
+        //     }
+
+        //     currentLevel--;
+        //     if (currentLevel == 0) {
+        //       console.log("\n");
+        //       currentLevel = nextLevel;
+        //       nextLevel = 0;
+        //     }
+        //   }
+        // }
+
+        // let input = { b: "0", e: "10", c: "110", d: "1110", a: "1111" };
+        // let nodes = [];
+        // for (let name in input) {
+        //   nodes.push(new Node(name, input[name]));
+        // }
+
+        // while (nodes.length > 1) {
+        //   nodes.sort((a, b) => a.val - b.val);
+        //   let left = nodes.shift();
+        //   let right = nodes.shift();
+        //   let parent = new Node(null, left.val + right.val, left, right);
+        //   nodes.push(parent);
+        // }
+
+        // printHuffmanTree(nodes[0]);
+
+        //////////////////////////////////////////////////////////////////////////////////
+        // outputVal = huffman_tree.get_text();
+        // console.log(typeof outputVal);
+
+        // const stringData = outputVal
+        // 	// dada 表示要转换的字符串数据，type 表示要转换的数据格式
+        // 	const blob = new Blob([stringData], {
+        // 		type: "text/plain;charset=utf-8"
+        // 	})
+        // 	// 根据 blob生成 url链接
+        // 	const objectURL = URL.createObjectURL(blob)
+
+        // 	// 创建一个 a 标签Tag
+        // 	const aTag = document.createElement('a')
+        // 	// 设置文件的下载地址
+        // 	aTag.href = objectURL
+        // 	// 设置保存后的文件名称
+        // 	aTag.download = "文本文件.txt"
+        // 	// 给 a 标签添加点击事件
+        // 	aTag.click()
+        // 	// 释放一个之前已经存在的、通过调用 URL.createObjectURL() 创建的 URL 对象。
+        // 	// 当你结束使用某个 URL 对象之后，应该通过调用这个方法来让浏览器知道不用在内存中继续保留对这个文件的引用了。
+        // // 	URL.revokeObjectURL(objectURL)
+        //////////////////////////////////////////////////////////////////////////////////////
       }
-      function Download(){
-          console.log(123);
-          var linkTag = document.getElementById("app");
-          var str = "沧海一声笑"; // 要保存的数据
-          linkTag.href = window.URL.createObjectURL(new Blob([str]));
-          linkTag.download = "2.txt";
-        }
     </script>
   </body>
 </html>
