@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <a id="app">点击试试</a>
+    <script>
+        var linkTag = document.getElementById("app");
+        var str = "沧海一声笑"; // 要保存的数据
+        linkTag.href = window.URL.createObjectURL(new Blob([str]));
+        linkTag.download = "2.txt";
+
+		// linkTag.click(); // 代码调用点击事件，也可以鼠标点击后触发。
+    </script>
+    
+</body>
+</html>
