@@ -120,12 +120,12 @@
         <svg class="icon" viewBox="0 0 1024 1024" width="30px">
           <path
             d="M424.024 766.098c-91.619 0-177.754-35.679-242.538-100.464-133.735-133.737-133.735-351.344 0-485.078 64.784-64.784 150.919-100.462 242.538-100.462s177.754 35.677 242.539 100.462c133.733 133.735 133.735 351.34 0 485.078-64.785 64.783-150.922 100.464-242.539 100.464zM424.024 196.085c-60.637 0-117.643 23.613-160.523 66.489-88.512 88.51-88.51 232.53 0 321.040 42.876 42.876 99.885 66.491 160.523 66.491s117.643-23.614 160.523-66.491c88.51-88.51 88.51-232.53 0-321.040-42.876-42.876-99.885-66.489-160.523-66.489z"
-            fill="#e94118"
+            fill="#d2a95d"
             p-id="1176"
           ></path>
           <path
             d="M886.838 943.904c-14.842 0-29.684-5.663-41.010-16.986l-261.286-261.285c-22.647-22.649-22.647-59.369 0-82.018 22.647-22.647 59.37-22.647 82.018 0l261.286 261.286c22.647 22.649 22.647 59.369 0 82.018-11.325 11.322-26.167 16.985-41.010 16.985z"
-            fill="#e94118"
+            fill="#d2a95d"
             p-id="1177"
           ></path>
         </svg>
@@ -436,28 +436,52 @@
         // printHuffmanTree(nodes[0]);
 
         //////////////////////////////////////////////////////////////////////////////////
-        // outputVal = huffman_tree.get_text();
-        // console.log(typeof outputVal);
+        outputVal = huffman_tree.get_text();
+        console.log(typeof outputVal);
 
-        // const stringData = outputVal
-        // 	// dada 表示要转换的字符串数据，type 表示要转换的数据格式
-        // 	const blob = new Blob([stringData], {
-        // 		type: "text/plain;charset=utf-8"
-        // 	})
-        // 	// 根据 blob生成 url链接
-        // 	const objectURL = URL.createObjectURL(blob)
+        const stringData = outputVal
+        	// dada 表示要转换的字符串数据，type 表示要转换的数据格式
+        	const blob1 = new Blob([stringData], {
+        		type: "text/plain;charset=utf-8"
+        	})
+        	// 根据 blob生成 url链接
+        	const objectURL = URL.createObjectURL(blob1)
 
-        // 	// 创建一个 a 标签Tag
-        // 	const aTag = document.createElement('a')
-        // 	// 设置文件的下载地址
-        // 	aTag.href = objectURL
-        // 	// 设置保存后的文件名称
-        // 	aTag.download = "文本文件.txt"
-        // 	// 给 a 标签添加点击事件
-        // 	aTag.click()
-        // 	// 释放一个之前已经存在的、通过调用 URL.createObjectURL() 创建的 URL 对象。
-        // 	// 当你结束使用某个 URL 对象之后，应该通过调用这个方法来让浏览器知道不用在内存中继续保留对这个文件的引用了。
-        // // 	URL.revokeObjectURL(objectURL)
+        	// 创建一个 a 标签Tag
+        	const aTag = document.createElement('a')
+        	// 设置文件的下载地址
+        	aTag.href = objectURL
+        	// 设置保存后的文件名称
+        	aTag.download = "htmTree.txt"
+        	// 给 a 标签添加点击事件
+        	aTag.click()
+        	// 释放一个之前已经存在的、通过调用 URL.createObjectURL() 创建的 URL 对象。
+        	// 当你结束使用某个 URL 对象之后，应该通过调用这个方法来让浏览器知道不用在内存中继续保留对这个文件的引用了。
+        // 	URL.revokeObjectURL(objectURL)
+        //////////////////////////////////////////////////////////////////////////////////////
+        
+        
+        /////////////////////////////////////////////////////////////////////////////////
+
+        const stringData_tl = '1010020120030213'
+        	// dada 表示要转换的字符串数据，type 表示要转换的数据格式
+        	const blob = new Blob([stringData_tl], {
+        		type: "text/plain;charset=utf-8"
+        	})
+        	// 根据 blob生成 url链接
+        	const objectURL_tl = URL.createObjectURL(blob)
+
+        	// 创建一个 a 标签Tag
+        	const aTag1 = document.createElement('a')
+        	// 设置文件的下载地址
+        	aTag1.href = objectURL_tl
+        	// 设置保存后的文件名称
+        	aTag1.download = "CodeFlie.txt"
+        	// 给 a 标签添加点击事件
+        	aTag1.click()
+        	// 释放一个之前已经存在的、通过调用 URL.createObjectURL() 创建的 URL 对象。
+        	// 当你结束使用某个 URL 对象之后，应该通过调用这个方法来让浏览器知道不用在内存中继续保留对这个文件的引用了。
+        // 	URL.revokeObjectURL(objectURL)
         //////////////////////////////////////////////////////////////////////////////////////
       }
     </script>
