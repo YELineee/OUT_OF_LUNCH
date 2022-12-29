@@ -15,3 +15,6 @@
 - 2022.12.23
   - hamuman_tree.html
     - homework
+- 2022.12.28
+  - hamuman_tree2.0.html
+    - adding some shit
